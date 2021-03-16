@@ -1,0 +1,151 @@
+/*
+모든 페이지에 적용할 공통 스타일
+*/
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oi&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap');
+
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    font-family: "Montserrat", "Lucida Grande", "Lucida Sans", Tahoma, Verdana, sansserif;
+    color: #000000;
+    text-align: center;
+}
+
+.lead{
+    color: white;
+}
+
+#header{
+    background-color: white;
+}
+
+#wrapper {
+    width: 980px;
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #FFFFFF;
+}
+
+#logo{
+    color: white;
+    font-family: 'Oi', cursive;
+}
+
+#headlogo{
+    margin-top: 50px;
+    height: 280px;
+}
+
+#navlogo{
+    font-size: 1.0em;
+    font-weight: 700;
+    margin-top: 25px;
+    margin-right: 5px;
+    margin-left: 10px;
+}
+
+table {
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+td {
+    text-align: left;
+    font-weight: normal;
+}
+
+h1 {
+    font-size: 4.0em;
+    color: white;
+    font-family: 'Oi', cursive;
+    text-shadow:
+            -1px -1px 0 #000,
+            1px -1px 0 #000,
+            -1px 1px 0 #000,
+            1px 1px 0 #000;
+}
+
+h2 {
+    font-size: 2.4em;
+}
+
+h3 {
+    font-size: 2.0em;
+}
+
+h4 {
+    font-size: 1.8em;
+}
+
+h5 {
+    color: darksalmon;
+    font-family: 'Oi', cursive;
+    font-size: 1.6em;
+    text-shadow:
+            -1px -1px 0 #000,
+            1px -1px 0 #000,
+            -1px 1px 0 #000,
+            1px 1px 0 #000;
+}
+
+h6{
+    font-size: 1.4em;
+}
+
+p {
+    font-size: 1.4em;
+}
+.banner {
+    text-align: center;
+    color: darkgray;
+}
+.container {
+    max-width: 960px;
+}
+
+
+#back{
+    background-color: white;
+}
+
+#navbar{
+    height: 70px;
+}
+
+
+#navp{
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.0em;
+    margin-left: 10px;
+    margin-right: 10px;
+    /*background-color: #474747;*/
+    /*color: white;*/
+    /*border-radius: 100px;*/
+    /*box-shadow: 2px 2px gray;*/
+}
+
+#usernav{
+    float: right;
+    text-align: right;
+    font-weight: 700px;
+}
+
+#navbar_right{
+    float: right;
+    text-align: right;
+    font-weight: 700;
+    font-size: 1.0em;
+    margin-left: 10px;
+    margin-right: 10px;
+}

@@ -1,0 +1,49 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout">
+
+<div layout:fragment="content">
+    <div class="container px-5 py-5">
+        <form method="post" name="cartForm" th:action="@{/cart/list}">
+        <table class="table table-bordered table-responsive-sm">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col" style="width:8%">select</th>
+                <th scope="col">image</th>
+                <th scope="col">name</th>
+                <th scope="col">price</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item:${likeList}">
+                <td class="text-center align-middle">
+
+                    <input type="checkbox" id="customCheck1" name="item_id" th:value="${item.id}">
+
+                </td>
+                <td class="align-middle text-center"
+                    th:onclick="location.href='/store/detail/[[${item.id}]]'">
+                    <img th:src="${item.imageUrl}" style="width: 50px;"></td>
+
+                <td class="align-middle" th:text="${item.name}"></td>
+
+                <td class="align-middle">
+                    ₩ <span th:text="${#numbers.formatInteger(item.price, 3, 'COMMA')}"></span>
+
+                </td>
+
+            </tr>
+            </tbody>
+            <tfoot>
+            <td colspan="4" class="text-center">
+                <button class="btn btn-dark" onclick="forms['cartForm'].submit()">Add Cart</button>
+            </td>
+            </tfoot>
+        </table>
+        </form>
+    </div>
+</div>
+
+
+</html>

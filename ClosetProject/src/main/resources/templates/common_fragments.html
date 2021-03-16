@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet"> <!--CDN 링크 -->
+</head>
+
+<!-- fragment 선언 -->
+
+<!-- header -->
+<div id="header" th:fragment="header">
+
+    <!-- main Container -->
+    <div class="py-1 text-center" id="headlogo">
+        <p><br/><h1 id="logo">Daily <br/>Closet</h1></p>
+    </div>
+
+
+    <!-- navigation bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top " id="navbar">
+        <div>
+            <a class="navbar-brand" href="/" th:href="@{/}"><p id="navlogo"> Daily Closet</p></a>
+        </div>
+
+
+        <!-- nav에 item 넣기 -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+
+                <!--                <li class="nav-item">-->
+                <!--                    <a class="nav-link" th:href="@{/logout}" sec:authorize="isAuthenticated()"><h5>Logout</h5></a>-->
+                <!--                </li> -> logout을 li가 아닌 form으로 구현-->
+
+
+                <li class="nav-item">
+                    <a id="navp" class="nav-link" th:href="@{/}">Outer</a>
+                </li>
+                <li class="nav-item">
+                    <a id="navp" class="nav-link" th:href="@{/}">Top</a>
+                </li>
+                <li class="nav-item">
+                    <a id="navp" class="nav-link" th:href="@{/}">Bottom</a>
+                </li>
+                <li class="nav-item">
+                    <a id="navp" class="nav-link" th:href="@{/}">Shoes</a>
+                </li>
+                <li class="nav-item">
+                    <a id="navp" class="nav-link" th:href="@{/}">Acc</a>
+                </li>
+
+                <!-- dropdown -->
+<!--                <li class="nav-item dropdown">-->
+<!--                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expended="false">-->
+<!--                    <div class="dropdown-menu" data-toggle="pill">-->
+<!--                        <a class="dropdown-item">Outer</a>-->
+<!--                        <a class="dropdown-item">Tops</a>-->
+<!--                        <a class="dropdown-item">Bottoms</a>-->
+<!--                        <a class="dropdown-item">Shoes</a>-->
+<!--                        <div class="dropdown-divider"></div>-->
+<!--                        <a class="dropdown-item">Etc.</a>-->
+<!--                    </div>-->
+<!--                    </a>-->
+<!--                </li>-->
+            </ul>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar_right">
+            <ul class="navbar-nav mr-auto" id="usernav">
+                <li class="nav-item">
+                    <a class="nav-link" id="navp_right" th:href="@{/}" sec:authorize="isAuthenticated()" th:text="${#authentication?.name}"></a>
+                    <!--                    <input type="hidden" id="current_user" value='${#authentication.name}'>-->
+                </li>
+                <li class="nav-item">
+                    <a id="navp_right" class="nav-link" th:href="@{/login}" sec:authorize="!isAuthenticated()">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a id="navp_right" class="nav-link" th:href="@{/signup}" sec:authorize="!isAuthenticated()">Sign up</a>
+                </li>
+                <li class="nav-item">
+                    <a id="navp_right" class="nav-link" th:href="@{/cart/list}" sec:authorize="isAuthenticated()">Cart</a>
+                </li>
+                <li class="nav-item">
+                    <a id="navp_right" class="nav-link" th:href="@{/store/like-list}" sec:authorize="isAuthenticated()">Wish List</a>
+                </li>
+
+                <form class="form-inline" th:action="@{/logout}" th:method="post" >
+                    <button type="submit" id="navp_right" class="nav-item" sec:authorize="isAuthenticated()">Logout</button>
+                </form>
+            </ul>
+
+            <!-- Search bar -->
+            <form class="form-inline my-2 my-lg-0" action="#">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">search</button>
+            </form>
+
+        </div>
+    </nav>
+    <div class="alert alert-warning" role="alert" th:if="${member != null && !member.emailVerified}">
+        Please check your <a class="alert-link">account certification email</a>.
+        <!-- TODO <a> link click 시 email 재전송 -->
+    </div>
+</div>
+
+
+
+<!-- footer -->
+<div id="footer" th:fragment="footer" class="jumbotron text-center bg-light banner" style="margin-bottom: 0">
+
+
+    <p>&copy;2021. Soir. All Rights Reserved.</p>
+</div>
+
+</html>
