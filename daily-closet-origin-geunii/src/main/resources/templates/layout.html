@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="'Daily Closet! ' + (${title} ?: 'Welcome.')">Soir</title>
+    <!-- title attribute의 존재 여부에 따라 title을 변경함 -->
+
+    <!-- CDN -->
+    <!-- Style CDN -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap-theme.min.css">-->
+
+    <!-- JS CDN -->
+    <!-- bootstrap -->
+    <!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>-->
+
+    <!-- font awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
+          integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu"
+          crossorigin="anonymous">
+
+    <!-- JQeury -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" th:href="@{/css/common/common.css}">
+
+    <!-- page마다 필요한 CDN을 넣어줄 빈칸(block) -->
+    <th:block layout:fragment="css"></th:block>
+    <th:block layout:fragment="js"></th:block>
+
+
+</head>
+<body id="back">
+
+<!-- header -->
+<th:block th:replace="common_fragments::header"></th:block>
+
+<!-- contents -->
+<!-- content fragment를 이곳에 배치할 수 있도록 block 생성 -->
+<th:block layout:fragment="content" class="bg-light"></th:block>
+
+<!-- footer -->
+<th:block th:replace="common_fragments::footer"></th:block>
+</body>
+
+<script>
+    // const init = () => {
+    //     console.log('initiated')
+    //     const foundBtn = document.getElementById("findBtn");
+    //     foundBtn.addEventListener('click', (e) => {
+    //         e.preventDefault();
+    //         fetch("http://localhost:8080/find-pw", {method: 'POST'})
+    //             .then(res => res.json())
+    //             .then(json => console.log(json.toString()));
+    //     })
+    // }
+    // init();
+
+
+    // $(function(){
+    //     $("#findBtn").click(function(e){
+    //         e.preventDefault();
+    //         console.log('hihihi');
+    //         // $.ajax({
+    //         //     url : "http://localhost:8080/find-pw",
+    //         //     type : "POST",
+    //         //     data : {
+    //         //         email : $("#email").val()
+    //         //     },
+    //         //     success : function(result) {
+    //         //         alert(result);
+    //         //     },
+    //         // })
+    //     });
+    // })
+</script>
+</html>
