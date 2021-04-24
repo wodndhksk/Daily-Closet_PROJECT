@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout" th:with="title='My Page'">
+
+<div layout:fragment="content" class="container" style="background-color: white;">
+
+    <div>
+        <h2 id="pageLogo">My Page</h2>
+        <small>Membership information can be checked and modified.</small>
+        <br>
+    </div>
+
+    <!-- 전체조회 목록 -->
+    <table class="table table-horizontal table-bordered">
+        <thead class="thead-strong">
+        <tr align="center">
+            <th>ID</th>
+            <th>Postal Code</th>
+            <th>Address</th>
+            <th>Detail Address</th>
+        </tr>
+        </thead>
+        <tbody id="tbody">
+        <tr align="center">
+            <td><a href="/update-memberInfo" th:text="${member.email}"></a></td>
+            <td th:text="${member.address.zipcode}"></td>
+            <td th:text="${member.address.city}"></td>
+            <td th:text="${member.address.street}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</html>

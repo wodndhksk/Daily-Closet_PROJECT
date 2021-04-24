@@ -1,0 +1,63 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout">
+
+<th:block layout:fragement="css">
+    <link rel="stylesheet" th:href="@{/css/user/style.css}">
+</th:block>
+
+<div layout:fragment="content" class="container" style="background-color: white;">
+    <div>
+        <h2 id="pageLogo">Cart</h2>
+        <small>Check your shopping cart.</small>
+    </div>
+
+    <p class="text-center" th:if="${'empty.cart' == error_message}">empty cart.</p>
+    <!--        <hr class = "col-12 my-4"/>-->
+
+    <br/>
+    <form th:if="${error_message == null}" th:action="@{/cart/list}" method="post" name="buyForm">
+        <table id="cart_table" class="table table-bordered table-responsive-sm">
+
+            <br/>
+            <thead>
+            <tr>
+                <th scope="col" style="width:8%">select</th>
+                <th scope="col">image</th>
+                <th scope="col">name</th>
+                <th scope="col">price</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="orderItem:${cartList}">
+                <td class="text-center align-middle">
+                    <input type="checkbox" id="customCheck1" name="item_id" th:value="${orderItem.id}">
+                </td>
+                <td class="align-middle text-center" th:onclick="itemDetail([[${orderItem.item.id}]])"><img
+                        th:src="${orderItem.item.urls.get(0)}" style="width: 50px;"></td>
+                <td class="align-middle" th:text="${orderItem.item.name}"
+                    th:onclick="itemDetail([[${orderItem.item.id}]])"></td>
+                <td class="align-middle">
+                    ₩ <span th:text="${#numbers.formatInteger(orderItem.item.price, 3, 'COMMA')}"></span>
+                    <a style="background-color: white;" id="cart_minus" th:href="@{/cart/minus(id=${orderItem.id})}">
+                        <i id="minus_icon" class="fas fa-minus-circle"></i>
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+
+            <tfoot>
+            <td colspan="3" class="text-right">
+                ₩ <b><span th:text="${#numbers.formatInteger(totalPrice, 3, 'COMMA')}"></span></b>
+            </td>
+            <td colspan="2" class="text-right">
+                <button class="btn btn-dark" onclick="forms['buyForm'].submit()">buy now</button>
+            </td>
+            </tfoot>
+
+        </table>
+    </form>
+</div>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<div th:fragment="review_list(reviewList, currentUser)">
+    <div class="container">
+
+        <div id="reviewHeadDiv">
+            <div>
+                <H4>REVIEW</H4>
+                <br/><br/>
+            </div>
+
+            <div id="reviewTableHead" class="row" style="margin-left: 30%;">
+                <div class="col-4" width="20%">Writer</div>
+                <div class="col-4" width="60%">Title</div>
+                <div class="col-4" width="20%">Regidate</div>
+            </div>
+            <hr>
+        </div>
+
+
+        <div class="container">
+            <div id="reviewFragDiv">
+                <div th:if="${reviewList.size==0}">No Reviews</div>
+                <form class="row" th:each="review:${reviewList}" action="javascript:;" onsubmit="modifyReview(this)">
+                    <input type="hidden" name="reviewTitle" th:value="${review.title}">
+                    <input type="hidden" name="reviewContent" th:value="${review.content}">
+                    <input type="hidden" name="reviewId" th:value="${review.id}">
+                    <div class="col" th:text="${review.member.email}" width="10%"></div>
+                    <div class="col" th:id="review-title" th:text="${review.title}" width="80%"
+                         th:value="${review.title}"></div>
+                    <div class="col" th:text="${review.createDate}" width="10%"></div>
+                    <div class="w-100"></div>
+                    <div class="col">
+                        <details>
+                            <summary style="text-align: right">details</summary>
+                            <div class="col" th:id="review-content" th:text="${review.content}" width="80%"
+                                 th:value="${review.content}"></div>
+                            <button class="btn btn-link" style="color:gray;font-size:small" type="button"
+                                    th:if="${currentUser.id}==${review.member.id}" th:id="delete-review"
+                                    th:value="${review.id}">DELETE
+                            </button>
+                            <button class="btn btn-link" style="color:gray;font-size:small"
+                                    th:if="${currentUser.id}==${review.member.id}" th:id="modify-review"
+                                    type="submit">MODIFY
+                            </button>
+                            <button class="btn btn-link" style="color:gray;font-size:small"
+                                    th:if="${currentUser.id}!=${review.member.id}" th:id="reply-review">REPLY
+                            </button>
+                        </details>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

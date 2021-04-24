@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout">
+
+<th:block layout:fragement="css">
+    <link rel="stylesheet" th:href="@{/css/user/style.css}">
+</th:block>
+
+<div layout:fragment="content">
+
+    <!--    Today's Weather-->
+    <div>
+        <th:block th:insert="weather_fragment :: weather()"/>
+    </div>
+
+    <div class="justify-content-center " style="height: 800px;">
+        <!--    Today's Weather-->
+        <th:block th:insert="search_fragment :: search()"/>
+
+        <!--        Cody Carosel-->
+        <th:block th:insert="cody_fragment :: cody(${codyList})"/>
+    </div>
+
+
+    <div class="row justify-content-center py-5" style="background-color:#F8F7F5;height: 700px;">
+        <th:block th:insert="recommend_fragment :: recommend(${top},${outer},${bottom})"/>
+    </div>
+</div>
+
+</html>

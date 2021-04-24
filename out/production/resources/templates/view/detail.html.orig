@@ -1,0 +1,297 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout" th:with="title='Detail Page'">
+
+
+<div layout:fragment="content" class="container" style="background-color: #FFFFFF;">
+
+    <div class="row justify-content-center py-5" id="detailbox">
+        <div id="product_img">
+            <div id="brandname">
+                <h3><b th:text="${item.brand}"></b></h3>
+            </div>
+
+            <div id="imgbox">
+                <img id="nowimg" th:src="${item.urls.get(0)}">
+            </div>
+
+            <div id="imgboxs_mini">
+                <div class="imgbox_mini" th:if="${item.urls.size()} >= 2"><img class="mini" id="mini0"
+                                                                               th:src="${item.urls.get(0)}"></div>
+                <div class="imgbox_mini" th:if="${item.urls.size()} >= 2"><img class="mini" id="mini1"
+                                                                               th:src="${item.urls.get(1)}"></div>
+                <div class="imgbox_mini" th:if="${item.urls.size()} >= 3"><img class="mini" id="mini2"
+                                                                               th:src="${item.urls.get(2)}"></div>
+                <div class="imgbox_mini" th:if="${item.urls.size()} >= 4"><img class="mini" id="mini3"
+                                                                               th:src="${item.urls.get(3)}"></div>
+                <div class="imgbox_mini" th:if="${item.urls.size()} >= 5"><img class="mini" id="mini4"
+                                                                               th:src="${item.urls.get(4)}"></div>
+                <div class="imgbox_mini" th:if="${item.urls.size()} >= 6"><img class="mini" id="mini5"
+                                                                               th:src="${item.urls.get(5)}"></div>
+                <div class="imgbox_mini" th:if="${item.urls.size()} >= 7"><img class="mini" id="mini6"
+                                                                               th:src="${item.urls.get(6)}"></div>
+                <div class="imgbox_mini" th:if="${item.urls.size()} >= 8"><img class="mini" id="mini7"
+                                                                               th:src="${item.urls.get(7)}"></div>
+                <div class="imgbox_mini" th:if="${item.urls.size()} >= 9"><img class="mini" id="mini8"
+                                                                               th:src="${item.urls.get(8)}"></div>
+                <div class="imgbox_mini" th:if="${item.urls.size()} >= 10"><img class="mini" id="mini9"
+                                                                                th:src="${item.urls.get(9)}"></div>
+            </div>
+        </div>
+
+        <div id="product_info">
+            <h4 th:text="${item.name}"/>
+            <p th:text="${item.brand}" id="brandinfo"/> / <p th:text="${item.code}" id="codeinfo"/>
+            <hr>
+<<<<<<< HEAD
+<!--            <i id="ic-like"><p id="likecount" th:value="${item.liked}"/>-->
+<!--                <p id="likeinfo"> people like this product. </p></i>-->
+=======
+            <i id="ic-like"><p id="likecount" th:value="${item.liked}"/>
+                <p id="likeinfo"> people like this product. </p></i>
+>>>>>>> newheejin
+            <p><h6>Gender</h6>Unisex</p>
+            <p><h6>Size</h6>
+                <div class="container">
+                    <div class="dropdown">
+<<<<<<< HEAD
+                        <button class="btn btn-light dropdown-toggle" type = "button" data-toggle="dropdown" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Size</button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li th:each="size:${item.sizes}">
+                            <a class="dropdown-item" th:href="@{#}" th:text="${size}"></a>
+=======
+                        <button class="btn btn-light dropdown-toggle" type = "button" data-toggle="dropdown"
+                                id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Size</button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li th:each="size:${item.sizes}">
+                            <a class="dropdown-item" th:href="@{#}" th:text="${size}" th:onclick="getSize([[${size}]])"></a>
+>>>>>>> newheejin
+                        </li>
+                        </ul>
+                    </div>
+                </div>
+            </p>
+            <p><h6>Price</h6>₩ <span th:text="${#numbers.formatInteger(item.price, 3, 'COMMA')}"></span></p>
+
+            <hr>
+            <div id="buyandcartbtn">
+                <button type="button" class="btn btn-light" id="buybtn">Buy Now</button>
+                <form id="cartform" th:action="@{/cart/list}" method="post" style="text-align: center;">
+                    <button id="cartbtn"
+                            type="submit"
+                            name="item_id"
+                            class="btn btn-light"
+                            th:value="${item.id}">Add Cart</button>
+<<<<<<< HEAD
+=======
+
+>>>>>>> newheejin
+                </form>
+
+                <button id="like" class="btn btn-light">
+                    <i id="like_status" th:class="${like_status} ? 'fas fa-heart':'far fa-heart'"
+                       class="far fa-heart"></i>
+                    like!
+                </button>
+
+                <button type="button" class="btn btn-light" id="createBtn">Write Review</button>
+            </div>
+        </div>
+
+    </div>
+
+    <th:block th:insert="review_fragment :: review_list(${item.getReview()}, ${currentUser})"/>
+
+    <!--like Modal -->
+    <div class="modal fade" id="modal" tabindex="-1" role="dialog"
+         aria-labelledby="modalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-dark" data-dismiss="modal"
+                            th:onclick="location.href='/store/detail/[[${item.id}]]'">닫기
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--delete review Modal -->
+    <div class="modal fade" id="delReviewModal" tabindex="-1" role="dialog" aria-labelledby="modalTitle"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <form class="needs-validation" th:id="deleteReview" th:action="@{/review/delete}" th:method="post">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Delete Review</h5>
+                        <input type="hidden" id="reviewId" name="reviewId">
+                        <input type="hidden" name="itemId" th:value="${item.getId()}">
+                    </div>
+                    <div class="modal-body">해당 글을 삭제합니다</div>
+                    <div class="modal-footer">
+                        <button id="submitBtn" type="submit" class="btn btn-dark">확인</button>
+                        <button type="button" class="btn btn-dark" data-dismiss="modal">닫기</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Review Modal -->
+    <div class="modal fade" id="writeReview" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <form class="needs-validation" th:id="reviewForm" th:object="${reviewForm}" th:action="@{/review}"
+                  th:method="post">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 id="modal-title" class="modal-title"></h4>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table">
+                            <tr>
+                                <input type="hidden" th:id="title" th:attr="name='itemId'" th:value="${item.getId()}">
+                                <input type="hidden" th:id="modal-review-id" th:attr="name='reviewId'">
+                                <td>Title</td>
+                                <td><input class="form-control" id="modal-review-title" th:attr="name='title'" type="text">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Content</td>
+                                <td><textarea class="form-control" id="modal-review-content" th:attr="name='contents'"
+                                              rows="10"></textarea></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button th:id="modalSubmit" type="submit" class="btn btn-success">submit</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script th:inline="javascript">
+        $(document).ready(function () {
+            $("#like").click(function () {
+                $.ajax({
+                    type: 'GET', // 요청 방식
+                    url: '/store/like', // 요청 보낼 주소
+                    data: 'id=[[${item.id}]]', // 보낼 파라미터
+                    // 127.0.0.1:8080/store/like?id=28
+                    dataType: 'json', // 응답메시지의 content-type 을 json으로 (json타입으로 받겠다!)
+                    success: function (result) {
+                        // Modal 띄우기
+                        $('.modal-body').html(result.message);
+                        $('#modal').modal('show');
+                        if (result.status) {
+                            $("like_status").attr('class', 'fas fa-heart');
+                            $("likecount").attr('value',$("likecount").getAttribute("value")+1);
+                        } else {
+                            $("like_status").attr('class', 'far fa-heart');
+                        }
+                    }
+                });
+            });
+        });
+
+        // $(document).ready(function () { // document loading 후 실행할 함수
+        //
+        //
+        //    var sizeButton = document.getElementById("#dropdownMenuButton1");
+        //    var sizes = document.querySelectorAll(".dropdown-item");
+        //    for(var i=0; i<sizes.length; i++){
+        //         sizes[i].addEventListener("click", getSize);
+        //    }
+        //
+        //    function getSize(){
+        //        var size = this.getAttribute("text");
+        //        console.log("사이즈--------->",size);
+        //        // sizeButton.innerHTML = size;
+        //        sizeButton.setAttribute("text", size);
+        //    }
+        //
+        // });
+
+        $(document).ready(function () { // document loading 후 실행할 함수
+
+            <!-- TODO : 이미지 누르면 해당 이미지를 큰 사진으로 보여주기-->
+            var bigpic = document.querySelector("#nowimg");
+            var smallpics = document.querySelectorAll(".mini"); // 작은 사진
+
+            for (var i = 0; i < smallpics.length; i++) {
+                smallpics[i].addEventListener("click", changepic); // 이벤트 처리 부여
+            }
+
+            function changepic() {
+                // 사진 변경 함수
+                var smallPicAttribute = this.getAttribute("src");
+                bigpic.setAttribute("src", smallPicAttribute);
+            }
+
+        });
+
+        $(document).ready(function () {
+
+            // 새 글 쓰기 버튼 클릭
+            $("#createBtn").click(function () {
+                $("#modal-title").text("Write Your Review");
+                $("#writeReview").modal();
+            });
+
+            // 삭제하기 버튼 클릭
+            $("#delete-review").click(function () {
+                $("#modal-title").text("Delete Your Review");
+                var reviewId = document.getElementById('delete-review').value;
+                $("#reviewId").val(reviewId);
+                console.log(reviewId);
+                $("#delReviewModal").modal();
+            });
+
+        });
+
+        function modifyReview(reviewForm) {
+            var title = reviewForm.reviewTitle.value;
+            var content = reviewForm.reviewContent.value;
+            var id = reviewForm.reviewId.value;
+
+            $("#modal-title").text("Modify Your Review");
+            $('#modal-review-title').val(title);
+            $('#modal-review-content').val(content);
+            $('#modal-review-id').val(id);
+
+            // document.getElementById("review-title").value = title;
+            // document.getElementById("review-content").value = content;
+            // document.getElementById("review-id").value = id;
+
+            console.log(document.getElementById("modal-review-title").value);
+            console.log(document.getElementById("modal-review-content").value);
+            console.log(document.getElementById("modal-review-id").value);
+
+            $("#writeReview").modal();
+        };
+
+        var sizeButton = document.getElementById("#dropdownMenuButton1");
+
+        function getSize(size){
+            // var size = this.getAttribute("text");
+            console.log("사이즈--------->",size);
+            // sizeButton.innerHTML = size;
+            sizeButton.setAttribute("text", size);
+        };
+
+    </script>
+</div>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout" th:with="title='Hello!'">
+
+<th:block layout:fragement="css">
+    <link rel="stylesheet" th:href="@{/css/user/style.css}">
+</th:block>
+
+<div layout:fragment="content" class="container" style="background-color: white;">
+
+    <br/>
+    <div class="py-`5` ml-2" id="pagebox">
+        <div id="catetitle">
+
+        </div>
+
+        <th:block th:insert="item_fragements :: item_list(${itemList})"/>
+    </div>
+
+
+
+    <div class="row" th:if="${pageInfo ne null}">
+        <div class="col-12">
+            <ul class="pagination pagination justify-content-center">
+                <li class="page-item" th:classappend="${!pageInfo.isPrevExist} ? disabled">
+                    <a class="page-link" href="#" th:href="${pageInfo.isPrevExist ? '/itemList?'
+                    + 'categoryName=' + categoryName
+                    + '&limit=' + pageInfo.postsPerPage
+                    + '&page=' + (pageInfo?.pageList[0] - 1) : ''}">&laquo;</a>
+                </li>
+                <li th:each="num: ${pageInfo.pageList}" class="page-item" th:classappend="${pageInfo.currentPageNum eq num} ? active">
+                    <a class="page-link" href="#" th:href="${'/itemList?'
+                    + 'categoryName=' + categoryName
+                    + '&limit=' + pageInfo.postsPerPage
+                    + '&page=' + num}" th:text="${num}"></a>
+                </li>
+                <li class="page-item" th:classappend="${!pageInfo.isNextExist} ? disabled">
+                    <a class="page-link" href="#" th:href="${pageInfo.isNextExist ? '/itemList?'
+                    + 'categoryName=' + categoryName
+                    + '&limit=' + pageInfo.postsPerPage
+                    + '&page=' + (pageInfo?.pageList[0] + 5) : ''}">&raquo;</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+</html>

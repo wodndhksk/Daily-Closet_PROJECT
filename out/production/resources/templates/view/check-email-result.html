@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout" th:with="title='Hello!'">
+
+<th:block layout:fragement="css">
+    <link rel="stylesheet" th:href="@{/css/user/style.css}">
+</th:block>
+
+<div layout:fragment="content">
+    <div class="py-5 text-center w-50 mx-auto">
+        <p class="lead" style="color: black;"><h1><b>Email certification</b></h1></p>
+        <h2 th:if="${error == null}">
+            <span th:text="${email}"></span>
+            <span>, thank you for join! </span>
+        </h2>
+
+        <p th:if="${error} != null" class="alert alert-danger" role="alert" th:text="${error}"></p>
+
+    </div>
+</div>
+
+</html>

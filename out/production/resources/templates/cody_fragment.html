@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<div th:fragment="cody(codyList)" class="container">
+
+    <div>
+        <h2 id="pageLogo">Recommend Cody</h2>
+        <small id="pageInfo">Choose your own style.</small>
+        <br/><br/>
+    </div>
+
+    <div class="owl-carousel" style="position: relative">
+        <div th:each="cody:${codyList}">
+            <div class="codybox">
+                <div class="col-5">
+                    <div class="codyArea_carousel" th:style="'background-color:'+${cody.getBackgroundId()}">
+                        <!--                               하의-->
+                        <div class="col" style="position: absolute">
+                            <img th:class="bottomCody"
+                                 th:src="@{'/assets/'+${cody.getBottomId()}+'.png'}"
+                                 style="position: absolute; top: 20px; left: 160px;"
+                                 th:style="'width:'+${cody.getBottomSize()}+'%'">
+                        </div>
+                        <!--                                상의-->
+                        <div class="col" style="position: absolute">
+                            <img th:class="topCody"
+                                 th:src="@{'/assets/'+${cody.getTopId()}+'.png'}"
+                                 style="position: absolute; top: 20px; left: 35px;"
+                                 th:style="'width:'+${cody.getTopSize()}+'%'">
+                        </div>
+                        <!--                                아우터-->
+                        <div class="col" style="position: absolute">
+                            <img th:if="${cody.getOuterId()!=0}" th:class="outerCody"
+                                 th:src="@{'/assets/'+${cody.getOuterId()}+'.png'}"
+                                 style="position: absolute; top: 120px; left: 95px; width: 50%;"
+                                 th:style="'width:'+${cody.getOuterSize()}+'%'">
+                        </div>
+                        <!--                                ACC-->
+                        <div class="col" style="position: absolute">
+                            <img th:if="${cody.getAccId()!=0}" th:class="accCody"
+                                 th:src="@{'/assets/'+${cody.getAccId()}+'.png'}"
+                                 style="position: absolute; top: 210px; left: 10px; width: 30%;"
+                                 th:style="'width:'+${cody.getAccSize()}+'%'">
+                        </div>
+                        <!--                                신발-->
+                        <div class="col" style="position: absolute">
+                            <img th:class="shoesCody"
+                                 th:src="@{'/assets/'+${cody.getShoesId()}+'.png'}"
+                                 style="position: absolute; top: 245px; left: 215px; width: 30%;"
+                                 th:style="'width:'+${cody.getShoesSize()}+'%'">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br><br><br>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $(".owl-carousel").owlCarousel();
+        });
+
+        $(".owl-carousel").owlCarousel({
+            nav: true,
+            loop: true,
+            dots: true,
+            autoplay: true,
+            rewind: true,
+            autoplayTimeout: 2000,
+            margin: 10,
+            responsiveClass: true,
+            responsive: {
+                0: {items: 2, nav: true},
+                600: {items: 3, nav: false, loop: true},
+                // 1000: {items: 6, nav: true,}
+            }
+        });
+
+
+    </script>
+
+</div>
+</html>

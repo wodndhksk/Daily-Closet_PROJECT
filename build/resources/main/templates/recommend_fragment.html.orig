@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<div th:fragment="recommend(top, outer, bottom)">
+
+    <div class="container justify-content-center py-5">
+        <div class="row">
+<<<<<<< HEAD
+            <h1></h1>
+            <div class="col-md-6 justify-content-center py-5">
+=======
+            <div class="col-md-6 justify-content-center">
+>>>>>>> newheejin
+                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" style="width: 400px;">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+                                class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                                aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                                aria-label="Slide 3"></button>
+                    </div>
+                    <div class="carousel-inner">
+<<<<<<< HEAD
+                        <div class="carousel-item active">
+=======
+                        <div class="carousel-item active" style="text-align: center;">
+>>>>>>> newheejin
+                            <img th:src="@{'/assets/'+${outer.img_name}}" class="d-block w-100" alt="1번 이미지">
+                        </div>
+                        <div class="carousel-item">
+                            <img th:src="@{'/assets/'+${top.img_name}}" class="d-block w-100" alt="2번 이미지">
+                        </div>
+                        <div class="carousel-item">
+                            <img th:src="@{'/assets/'+${bottom.img_name}}" class="d-block w-100" alt="3번 이미지">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev"  type="button"
+                            onclick="$('#carouselExampleIndicators').carousel('prev')"
+                            data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button"
+                            onclick="$('#carouselExampleIndicators').carousel('next')"
+                            data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+
+<<<<<<< HEAD
+            <div class="col-md-6  justify-content-center py-5">
+
+                <h2 style="text-align: left">
+=======
+            <div class="col-md-6  justify-content-center py-5" id="recoFragDiv">
+
+                <h2 id="recoFragTitle" style="text-align: left">
+>>>>>>> newheejin
+                    날씨 분석을 통한 </br>
+                    아이템 추천<br>
+                </h2>
+
+<<<<<<< HEAD
+                <p style="text-align: left">
+                    요즘 날씨에 꼭 맞는 아이템만 골라보세요!
+                    <br>
+                    중기 날씨 예보를 분석하여 추천 드리는 아이템입니다!
+=======
+                <p id="recoFragInfo" style="text-align: left">
+                    중기 날씨 예보 분석을 통해
+                    <br>
+                    당신에게 꼭 맞는 아이템만 골라드립니다.
+>>>>>>> newheejin
+                </p>
+
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
+</html>

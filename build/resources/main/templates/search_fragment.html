@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<div th:fragment="search()">
+
+    <div class="row">
+        <form class="form-inline my-2 my-lg-0 justify-content-center py-5" th:object="${searchForm}" th:action="@{/searchList}" th:method="get">
+            <select id="searchType" name="searchType" th:attr="name='option'">
+                <option th:value="item_all" >Category</option>
+                <option th:value="item_name">Product name</option>
+                <option th:value="brand_name">Brand</option>
+            </select>
+            <input class="form-control mr-m-2" name="keyword"  th:attr="name='keyword'"id="keyword" type="search" placeholder="Search"
+                   aria-label="Search">
+            &nbsp&nbsp
+            <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">search</button>
+        </form>
+    </div>
+
+    <br>
+</div>
+</html>
