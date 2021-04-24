@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout" th:with="title='Update-memberInfo'">
+
+<th:block layout:fragment="js">
+    <script th:src="@{/js/user/form-validation.js}"></script>
+    <script th:src="@{/js/user/daum-address.js}"></script>
+    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+    <!-- TODO -->
+    <meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
+    <!-- default header name is X-CSRF-TOKEN -->
+    <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
+</th:block>
+
+<div layout:fragment="content">
+    <!-- 아이디 -->
+    <table class="table table-horizontal table-bordered">
+        <thead class="thead-strong">
+        <tr align="center">
+            <th>아이디</th>
+        </tr>
+        </thead>
+        <tbody id="tbody">
+        <tr align="center">
+            <td th:text="${member.email}" readonly></td>
+        </tr>
+        </tbody>
+    </table>
+    <!-- 회원정보 수정/삭제 -->
+    <form class="needs-validation" th:object="${updateForm}" th:action="@{/update-memberInfo}"
+          method="post" name="updateForm" novalidate>
+
+        <!-- 배송지 정보 -->
+        <div class="col-2">
+            <label for="zipcode" class="form-label">우편번호</label>
+            <div class="input-group">
+                <input type="text" th:field="*{zipcode}" class="form-control" id="zipcode" readonly>
+            </div>
+        </div>
+        <div class="col-4">
+            <label for="city" class="form-label">주소</label>
+            <div class="input-group">
+                <input type="text" th:field="*{city}" class="form-control" id="city" readonly>
+            </div>
+        </div>
+        <div class="col-4">
+            <label for="street" class="form-label">상세주소</label>
+            <div class="input-group">
+                <input type="text" th:field="*{street}" class="form-control" id="street">
+            </div>
+        </div>
+        <div class="col-2">
+            <label class="form-label">address</label>
+            <button class="w-100 btn btn-dark" type="button" onclick="search(updateForm)">search</button>
+        </div>
+        <hr class="col-12 my-4">
+        <a href="/" role="button" class="btn btn-dark btn">취소</a>
+        <button class="btn btn-dark btn" type="submit">수정완료</button>
+        <button class="btn btn-dark btn" type="button" id="btn-delete">회원탈퇴</button>
+    </form>
+    <script>
+        var main = {
+            init : function () {
+                var _this = this;
+                $('#btn-delete').on('click', function () {
+                    _this.delete();
+                });
+
+                // TODO
+                var token = $("meta[name='_csrf']").attr("content");
+                var header = $("meta[name='_csrf_header']").attr("content");
+                $(document).ajaxSend(function(e, xhr, options) {
+                    xhr.setRequestHeader(header, token);
+                });
+            },
+            delete : function () {
+                var id = '[[${member.id}]]';
+                var token = '[[${_csrf.token}]]';
+                $.ajax({
+                    type: 'post',
+                    url: '/delete/' + id,
+                    dataType: 'json',
+                    contentType:'application/json; charset=utf-8'
+                }).done(function() {
+                    alert('회원탈퇴가 되었습니다.');
+                    window.location.href = '/';
+                }).fail(function (error) {
+                    alert(JSON.stringify(error));
+                });
+            }
+        };
+        main.init();
+    </script>
+<!--    <script>-->
+<!--        var main = {-->
+<!--            init : function () {-->
+<!--                var _this = this;-->
+<!--                // 회원탈퇴 이벤트 등록-->
+<!--                $('#btn-delete').on('click', function () {-->
+<!--                    _this.delete();-->
+<!--                });-->
+<!--            },-->
+<!--            // 회원탈퇴 function 등록-->
+<!--            delete : function () {-->
+<!--                var id = $('#id').val();-->
+<!--                $.ajax({-->
+<!--                    type: 'POST',-->
+<!--                    url: '/delete/'+id,-->
+<!--                    dataType: 'json',-->
+<!--                    contentType:'application/json; charset=utf-8'-->
+<!--                }).done(function() {-->
+<!--                    alert('회원탈되가 되었습니다.');-->
+<!--                    window.location.href = '/';-->
+<!--                }).fail(function (error) {-->
+<!--                    alert(JSON.stringify(error));-->
+<!--                });-->
+<!--            }-->
+
+<!--        };-->
+<!--        main.init();-->
+<!--    </script>-->
+</div>
+</html>

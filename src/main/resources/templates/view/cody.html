@@ -1,0 +1,394 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout" th:with="title='Cody Page'">
+
+
+<div layout:fragment="content" class="container" style="background-color: #FFFFFF;">
+
+    <div>
+        <h2 id="pageLogo">New Cody</h2>
+        <small id="pageInfo">Coordinate your own Style!</small>
+    </div>
+
+    <br><br>
+    <form class="needs-validation" th:id="codyForm" th:action="@{/cody}" th:object="${codyForm}" method="post"
+          novalidate>
+        <div class="row justify-content-center py-5">
+            <div class="codybox">
+                <div class="col-5">
+                    <div class="codyArea" id="codyArea">
+                        <!--                        배경색-->
+                        <input th:id="backgroundId" type="hidden" th:attr="name='backgroundId'">
+                        <!--                               하의-->
+                        <div class="col" style="position: absolute">
+                            <img class="bottomCody" th:id="bottomCody">
+                            <input th:id="bottomId" type="hidden" th:attr="name='bottomId'">
+                            <input th:id="bottomSize" id="bottomSize" type="hidden" th:value="60"
+                                   th:attr="name='bottomSize'">
+                        </div>
+                        <!--                                상의-->
+                        <div class="col" style="position: absolute">
+                            <img class="topCody" th:id="topCody">
+                            <input th:id="topId" type="hidden" th:attr="name='topId'">
+                            <input th:id="topSize" id="topSize" type="hidden" th:value="50" th:attr="name='topSize'">
+                        </div>
+                        <!--                                아우터-->
+                        <div class="col" style="position: absolute">
+                            <img class="outerCody" th:id="outerCody">
+                            <input th:id="outerId" type="hidden" th:attr="name='outerId'">
+                            <input th:id="outerSize" id="outerSize" type="hidden" th:value="50"
+                                   th:attr="name='outerSize'">
+                        </div>
+                        <!--                                ACC-->
+                        <div class="col" style="position: absolute">
+                            <img class="accCody" th:id="accCody">
+                            <input th:id="accId" type="hidden" th:attr="name='accId'">
+                            <input th:id="accSize" id="accSize" type="hidden" th:value="30" th:attr="name='accSize'">
+                        </div>
+                        <!--                                신발-->
+                        <div class="col" style="position: absolute">
+                            <img class="shoesCody" th:id="shoesCody">
+                            <input th:id="shoesId" type="hidden" th:attr="name='shoesId'">
+                            <input th:id="shoesSize" id="shoesSize" type="hidden" th:value="30"
+                                   th:attr="name='shoesSize'">
+                        </div>
+
+                        <div class="col" style="position: absolute">
+                            <h5 th:id="userId" th:value="'@ '+${member.getEmail()}"
+                                style="writing-mode: sideways-lr; margin-right:0px; margin-bottom: 0px; background-color: #F8EAC3">
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="cody_info">
+                <div style="text-align: left"><p id="codyColorLabel">#Background Color</p><br/></div>
+                <div class="row">
+                    <!--                    남색-->
+                    <div class="color_square" style="background-color:#37505B" onclick="changeColor('#37505B');"></div>
+                    <!--                    빨강-->
+                    <div class="color_square" style="background-color:#AB5B54" onclick="changeColor('#AB5B54');"></div>
+                    <!--                    노랑-->
+                    <div class="color_square" style="background-color:#F8EAC3" onclick="changeColor('#F8EAC3');"></div>
+                    <!--                    민트-->
+                    <div class="color_square" style="background-color:#779792" onclick="changeColor('#779792');"></div>
+                    <!--                    다크 그레이-->
+                    <div class="color_square" style="background-color:#888679" onclick="changeColor('#888679');"></div>
+                    <!--                    그레이-->
+                    <div class="color_square" style="background-color:#9DAAA1" onclick="changeColor('#9DAAA1');"></div>
+                </div>
+
+                <br/>
+                <div style="text-align: left"><p id="codySliderLabel">#Resize</div>
+                <div class="row">
+                    <!--        슬라이더-->
+                    <div class="slidecontainer">
+                        <input type="range" min="1" max="65" value="60" class="slider" id="outerRange"
+                               style="display: none" onchange="changeSize(this.id, this.value)">
+                        <input type="range" min="1" max="85" value="50" class="slider" id="topRange"
+                               onchange="changeSize(this.id, this.value)">
+                        <input type="range" min="1" max="75" value="50" class="slider" id="bottomRange"
+                               style="display: none" onchange="changeSize(this.id, this.value)">
+                        <input type="range" min="1" max="45" value="30" class="slider" id="shoesRange"
+                               style="display: none" onchange="changeSize(this.id, this.value)">
+                        <input type="range" min="1" max="50" value="30" class="slider" id="accRange"
+                               style="display: none" onchange="changeSize(this.id, this.value)">
+
+                    </div>
+                </div>
+                <br><br>
+                <div class="row">
+                    <input type="button" th:id="submit_btn" class="btn btn-light" value="Save" style="width:200px">&nbsp&nbsp
+                    <input  type="button" th:id="submit_btn" class="btn btn-light" value="Reset" style="width:200px"
+                            th:onclick="location.href='/cody'">
+                </div>
+                <br>
+
+                <div class="row">
+                    <input type="button" th:id="myCody_btn" class="btn btn-light" value="My Cody List"
+                           th:onclick="location.href='/codyList'" style="width:200px">&nbsp&nbsp
+                    <input type="button" th:id="myCody_btn" class="btn btn-light" value="Other Cody List"
+                           th:onclick="location.href='/allCodyList'" style="width:200px">
+                </div>
+
+            </div>
+
+        </div>
+    </form>
+
+    <div class="container">
+        <button type="button" class="btn btn-light" style="margin-right: 10px;" onclick="navEvent('top-id')">TOP</button>
+        <button type="button" class="btn btn-light" style="margin-right: 10px;" onclick="navEvent('outer-id')">OUTER</button>
+        <button type="button" class="btn btn-light" style="margin-right: 10px;" onclick="navEvent('bottom-id')">BOTTOM</button>
+        <button type="button" class="btn btn-light" style="margin-right: 10px;" onclick="navEvent('shoes-id')">SHOES</button>
+        <button type="button" class="btn btn-light" style="margin-right: 10px;" onclick="navEvent('acc-id')">ACC</button>
+    </div>
+
+    <div class="container py-5" style="text-align: center">
+        <!--                아우터-->
+        <div class="likeList" id="outerList" style="display: none">
+            <li th:if="${outerList.size()== 0}">Add Outer List</li>
+            <div class="owl-carousel" style="text-align: center">
+                <div class="col" th:each="item:${outerList}">
+                    <img th:class="outerimgbox" th:src="@{'/assets/'+${item.getImg_name()}}"
+                         th:alt="${item.getId()}">
+                </div>
+            </div>
+        </div>
+
+        <!--                상의-->
+        <div class="likeList" id="topList">
+            <li th:if="${topList.size()== 0}">Add Top List</li>
+            <div class="owl-carousel" style="text-align: center">
+                <div class="col" th:each="item:${topList}">
+                    <img th:class="topimgbox" th:src="@{'/assets/'+${item.getImg_name()}}"
+                         th:alt="${item.getId()}">
+                </div>
+            </div>
+        </div>
+
+
+        <!--                하의-->
+        <div class="likeList" id="bottomList" style="display: none">
+            <li th:if="${bottomList.size()== 0}">Add Bottom List</li>
+            <div class="owl-carousel" style="text-align: center">
+                <div class="col" th:each="item:${bottomList}">
+                    <img th:class="bottomimgbox" th:src="@{'/assets/'+${item.getImg_name()}}"
+                         th:alt="${item.getId()}">
+                </div>
+            </div>
+        </div>
+
+        <!--                가방-->
+        <div class="likeList" id="accList" style="display: none">
+            <li th:if="${accList.size()== 0}">Add Acc List</li>
+            <div class="owl-carousel" style="text-align: center">
+                <div class="col" th:each="item:${accList}">
+                    <img th:class="accimgbox" th:src="@{'/assets/'+${item.getImg_name()}}"
+                         th:alt="${item.getId()}">
+                </div>
+            </div>
+        </div>
+
+        <!--                신발-->
+        <div class="likeList" id="shoesList" style="display: none">
+            <li th:if="${shoesList.size()== 0}">Add Shoes List</li>
+            <div class="owl-carousel" style="text-align: center">
+                <div class="col" th:class="shoes" th:each="item:${shoesList}">
+                    <img th:class="shoesimgbox" th:src="@{'/assets/'+${item.getImg_name()}}"
+                         th:alt="${item.getId()}">
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $("#submit_btn").click(function () {
+                if ($("#topCody").attr('src') == null) {
+                    alert("Please select a top.");
+                    return false;
+                }
+
+                if ($("#bottomCody").attr('src') == null) {
+                    alert("Please select a bottom");
+                    return false;
+                }
+
+                if ($("#shoesCody").attr('src') == null) {
+                    alert("Please select the shoes.");
+                    return false;
+                }
+
+                $("#codyForm").submit();
+                alert("Success save this cody");
+            });
+        });
+
+
+        $(document).ready(function () { // document loading 후 실행할 함수
+
+            var outerCody = document.querySelector("#outerCody");
+            var topCody = document.querySelector("#topCody");
+            var bottomCody = document.querySelector("#bottomCody");
+            var accCody = document.querySelector("#accCody");
+            var shoesCody = document.querySelector("#shoesCody");
+
+            var outerbox = document.querySelectorAll(".outerimgbox");
+            var topbox = document.querySelectorAll(".topimgbox");
+            var bottombox = document.querySelectorAll(".bottomimgbox");
+            var accbox = document.querySelectorAll(".accimgbox");
+            var shoesbox = document.querySelectorAll(".shoesimgbox");
+
+            var outerId = document.querySelector("#outerId");
+            var topId = document.querySelector("#topId");
+            var bottomId = document.querySelector("#bottomId");
+            var accId = document.querySelector("#accId");
+            var shoesId = document.querySelector("#shoesId");
+
+
+            for (var i = 0; i < outerbox.length; i++) {
+                outerbox[i].addEventListener("click", changepic);
+            }
+            for (var i = 0; i < topbox.length; i++) {
+                topbox[i].addEventListener("click", changepic);
+            }
+            for (var i = 0; i < bottombox.length; i++) {
+                bottombox[i].addEventListener("click", changepic);
+            }
+            for (var i = 0; i < accbox.length; i++) {
+                accbox[i].addEventListener("click", changepic);
+            }
+            for (var i = 0; i < shoesbox.length; i++) {
+                shoesbox[i].addEventListener("click", changepic);
+            }
+
+
+            function changepic() {
+                var pickSrc = this.getAttribute("src");
+                var pickAlt = this.getAttribute("alt");
+
+
+                if (this.getAttribute("class") == "shoesimgbox") {
+                    shoesCody.setAttribute("src", pickSrc);
+                    shoesId.setAttribute("value", pickAlt);
+                }
+
+                if (this.getAttribute("class") == "outerimgbox") {
+                    outerCody.setAttribute("src", pickSrc);
+                    outerId.setAttribute("value", pickAlt);
+                }
+                ;
+
+                if (this.getAttribute("class") == "topimgbox") {
+                    topCody.setAttribute("src", pickSrc);
+                    topId.setAttribute("value", pickAlt);
+                }
+                ;
+                if (this.getAttribute("class") == "bottomimgbox") {
+                    bottomCody.setAttribute("src", pickSrc);
+                    bottomId.setAttribute("value", pickAlt);
+                }
+                ;
+                if (this.getAttribute("class") == "accimgbox") {
+                    accCody.setAttribute("src", pickSrc);
+                    accId.setAttribute("value", pickAlt);
+                }
+                ;
+
+
+            };
+
+        });
+
+
+        //navBar 이벤트
+        function navEvent(divId) {
+
+            switch (divId) {
+                case "outer-id":
+                    $(".likeList").hide();
+                    $(".slider").hide();
+                    $("#outerList").show();
+                    $("#outerRange").show();
+                    break;
+
+                case "top-id":
+                    $(".likeList").hide();
+                    $(".slider").hide();
+                    $("#topList").show();
+                    $("#topRange").show();
+                    break;
+
+                case "bottom-id":
+                    $(".likeList").hide();
+                    $(".slider").hide();
+                    $("#bottomList").show()
+                    $("#bottomRange").show();
+                    ;
+
+                    break;
+
+                case "shoes-id":
+                    $(".likeList").hide();
+                    $(".slider").hide();
+                    $("#shoesList").show();
+                    $("#shoesRange").show();
+                    break;
+
+                case "acc-id":
+                    $(".likeList").hide();
+                    $(".slider").hide();
+                    $("#accList").show();
+                    $("#accRange").show();
+                    break;
+            }
+        }
+
+        // background color event
+        function changeColor(backgroundColor) {
+            document.getElementById("codyArea").style.backgroundColor = backgroundColor;
+            document.getElementById("backgroundId").setAttribute("value", backgroundColor);
+            console.log(backgroundColor);
+            console.log(document.getElementById("backgroundId").getAttribute("value"));
+
+        };
+
+        // slider event
+        function changeSize(id, value) {
+
+            switch (id.toString()) {
+                case "outerRange" :
+                    document.getElementById("outerCody").style.width = value + "%";
+                    document.getElementById("outerSize").setAttribute("value", value);
+                    break;
+                case "topRange" :
+                    document.getElementById("topCody").style.width = value + "%";
+                    document.getElementById("topSize").setAttribute("value", value);
+                    break;
+                case "bottomRange" :
+                    document.getElementById("bottomCody").style.width = value + "%";
+                    document.getElementById("bottomSize").setAttribute("value", value);
+                    break;
+                case "shoesRange" :
+                    document.getElementById("shoesCody").style.width = value + "%";
+                    document.getElementById("shoesSize").setAttribute("value", value);
+                    break;
+                case "accRange" :
+                    document.getElementById("accCody").style.width = value + "%";
+                    document.getElementById("accSize").setAttribute("value", value);
+                    break;
+            }
+        };
+
+        $(document).ready(function () {
+            $(".owl-carousel").owlCarousel();
+        });
+
+        $(".owl-carousel").owlCarousel({
+            center: true,
+            nav: false,
+            loop: false,
+            dots: true,
+            autoplay: false,
+            rewind: true,
+            autoplayTimeout: 2000,
+            margin: 10,
+            responsiveClass: true,
+            responsive: {
+                // 0: {items: 2, nav: false},
+                // 600: {items: 3, nav: false, loop: false},
+                1000: {items: 8, nav: false,}
+            }
+        });
+
+    </script>
+</div>
+
+</html>

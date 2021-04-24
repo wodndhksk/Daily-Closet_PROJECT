@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout" th:with="title='Login'">
+
+<div layout:fragment="content">
+    <div class="container">
+        <!-- 전달받은 attribute에 따른 분기 처리 -->
+        <div th:if="${error_code != null}">
+            <p class="lead" style="color:black;">Wrong email.</p>
+        </div>
+
+        <div th:if="${result_code == 'password.reset.send'}">
+            <p class="lead" style="color:black;"> Send link email to <span th:text="${email}"></span>. Please check email.</p>
+        </div>
+
+        <div th:if="${result_code == 'password.reset.complete'}">
+            <p class="lead" style="color:black;">Complete to change password!</p>
+        </div>
+    </div>
+</div>
+</html>

@@ -1,0 +1,36 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout">
+
+<th:block layout:fragement="css">
+    <link rel="stylesheet" th:href="@{/css/user/style.css}">
+</th:block>
+
+<div layout:fragment="content" class="container" style="background-color: white;">
+
+    <div>
+        <h2 id="pageLogo">Like List</h2>
+        <small id="pageInfo">Check your favorite products.</small>
+    </div>
+
+    <br>
+    <br>
+
+    <p th:if="${'empty.list' == error_message}">
+        Empty list.
+    </p>
+
+    <div th:if="${error_message == null}" class="row" id="likeitem_div">
+        <div class="col-4" th:each="item:${likeList}">
+            <img id="likeitem_img" th:src="${item.urls.get(0)}"
+                 th:onclick="location.href='/store/detail/[[${item.id}]]'"/>
+            <p class="xs" id="likeitem_name" th:text="${item.name}" style="width:180px; overflow:hidden;"></p>
+            <p class="xs" id="likeitem_price" th:text="${#numbers.formatInteger(item.price, 3, 'COMMA')}"></p>
+        </div>
+    </div>
+</div>
+<br>
+
+
+</html>

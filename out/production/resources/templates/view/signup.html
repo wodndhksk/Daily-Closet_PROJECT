@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout" th:with="title='Sign up'">
+
+
+<th:block layout:fragment="js">
+    <script th:src="@{/js/user/form-validation.js}"></script>
+    <script th:src="@{/js/user/daum-address.js}"></script>
+    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+</th:block>
+
+<th:block layout:fragment="css">
+    <link href="@{/css/user/signup.css}" rel="stylesheet">
+</th:block>
+
+
+<div layout:fragment="content" class="container" style="background-color: white;">
+
+    <div>
+        <h2 id="pageLogo">Sign Up</h2>
+        <small id="pageInfo">Please submit this form.</small>
+    </div>
+
+    <div class="row g-10" style="margin-bottom: 10px;" id="signUpDiv">
+        <hr class="col-12 my-4">
+        <p class="mb-3 col-12" id="infoLabel">기본 정보</p>
+        <form class="needs-validation" th:object="${signUpForm}" th:action="@{/signup}" method="post"
+              name="signupForm" novalidate>
+
+            <div class="row g-3">
+                <div class="col-9">
+                    <label for="email" class="form-label">Email *</label>
+                    <div class="input-group">
+                        <span class="input-group-text">@</span>
+                        <input type="text" th:field="*{email}" class="form-control" id="email"
+                               placeholder="you@example.com" required>
+                        <div class="invalid-feedback">
+                            <small>Please enter your email information.</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-9" id="passwordDiv">
+                    <label for="password" class="form-label">Password *</label>
+                    <div class="input-group">
+                        <input type="password" th:field="*{password}" class="form-control" id="password" required>
+                        <div class="invalid-feedback">
+                            <small>Please enter your password.</small>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-9" id="checkboxDiv">
+                    <div class="form-check" id="policyDiv">
+                        <input type="checkbox" th:field="*{agreePolicy}" th:value="true" class="form-check-input"
+                               id="agreement" checked>
+
+                            <small class="form-check-label" for="agreement" id="agreePolicyLabel">
+                                I agree the policy.</small>
+
+                        <div class="invalid-feedback">
+                            <small>Please agree the policy.</small>
+                        </div>
+
+                    </div>
+                </div>
+                <hr class="col-12 my-4">
+
+
+                <p class="mb-3 col-12" id="infoLabel2">배송지 정보</p>
+
+                <div class="col-2">
+                    <label for="zipcode" class="form-label">postal code</label>
+                    <div class="input-group">
+                        <input type="text" th:field="*{zipcode}" class="form-control" id="zipcode" readonly>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <label for="city" class="form-label">address</label>
+                    <div class="input-group">
+                        <input type="text" th:field="*{city}" class="form-control" id="city" readonly>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <label for="street" class="form-label">detail address</label>
+                    <div class="input-group">
+                        <input type="text" th:field="*{street}" class="form-control" id="street">
+                    </div>
+                </div>
+                <div class="col-2">
+                    <label class="form-label">address</label>
+                    <button class="w-100 btn btn-dark" type="button" onclick="search(signupForm)">search</button>
+                </div>
+                <hr class="col-12 my-4">
+                <button class="w-100 btn btn-dark btn" type="submit">Continue to checkout</button>
+            </div>
+        </form>
+    </div>
+
+
+    <footer class="my-5 pt-5"></footer>
+</div>
+</div>
+
+
+</html>

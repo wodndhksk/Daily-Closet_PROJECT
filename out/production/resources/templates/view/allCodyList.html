@@ -1,0 +1,118 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout" th:with="title='Detail Page'">
+
+
+<div layout:fragment="content" class="container" style="background-color: #FFFFFF;">
+    <br><br><br>
+    <h3 class="text-left" style="margin-left: 100px"><b>New Cody</b></h3>
+    <hr>
+    <br><br><br>
+    <div class="component justify-content-center ">
+        <div class="row justify-content-center py-5" style="margin-bottom: 200px;">
+            <!--                코디박스-->
+            <div class="col-3 justify-content-center py-5" th:each="cody:${codyList}"
+                 style="margin-right: 50px; margin-bottom: 100px;">
+                <div class="codyArea_carousel" th:style="'background-color:'+${cody.getBackgroundId()}"
+                     style="position: relative;">
+                    <!--                               하의-->
+                    <div class="col" style="position: absolute">
+                        <img th:class="bottomCody"
+                             th:src="@{'/assets/'+${cody.getBottomId()}+'.png'}"
+                             style="position: absolute; top: 20px; left: 160px;"
+                             th:style="'width:'+${cody.getBottomSize()}+'%'">
+                    </div>
+                    <!--                                상의-->
+                    <div class="col" style="position: absolute">
+                        <img th:class="topCody"
+                             th:src="@{'/assets/'+${cody.getTopId()}+'.png'}"
+                             style="position: absolute; top: 20px; left: 35px;"
+                             th:style="'width:'+${cody.getTopSize()}+'%'">
+                    </div>
+                    <!--                                아우터-->
+                    <div class="col" style="position: absolute">
+                        <img th:if="${cody.getOuterId()!=0}" th:class="outerCody"
+                             th:src="@{'/assets/'+${cody.getOuterId()}+'.png'}"
+                             style="position: absolute; top: 120px; left: 95px; width: 50%;"
+                             th:style="'width:'+${cody.getOuterSize()}+'%'">
+                    </div>
+                    <!--                                ACC-->
+                    <div class="col" style="position: absolute">
+                        <img th:if="${cody.getAccId()!=0}" th:class="accCody"
+                             th:src="@{'/assets/'+${cody.getAccId()}+'.png'}"
+                             style="position: absolute; top: 210px; left: 10px; width: 30%;"
+                             th:style="'width:'+${cody.getAccSize()}+'%'">
+                    </div>
+                    <!--                                신발-->
+                    <div class="col" style="position: absolute">
+                        <img th:class="shoesCody"
+                             th:src="@{'/assets/'+${cody.getShoesId()}+'.png'}"
+                             style="position: absolute; top: 245px; left: 215px; width: 30%;"
+                             th:style="'width:'+${cody.getShoesSize()}+'%'">
+                    </div>
+                </div>
+                <!--                좋아요 버튼-->
+                <button id="like" class="btn btn-light justify-content-center" style="width: 200px" onclick="">
+                    <i id="cody_like_status" class="far fa-heart"></i>
+                    <b>Like It!</b>
+                    <!--                    <i id="cody_like_status" th:class="${like_status} ? 'fas fa-heart':'far fa-heart'"-->
+                    <!--                       class="far fa-heart"></i>-->
+
+                </button>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!--like Modal -->
+    <div class="modal fade" id="modal" tabindex="-1" role="dialog"
+         aria-labelledby="modalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-dark" data-dismiss="modal"
+                            th:onclick="location.href='/store/allCodyList'">닫기
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+
+       function codyLike(codyId) {
+               $.ajax({
+                    type: 'GET', // 요청 방식
+                    url: '/cody/like', // 요청 보낼 주소
+                    data: 'id= codyId', // 보낼 파라미터
+                    dataType: 'json',
+                    success: function (result) {
+                        // Modal 띄우기
+                        $('.modal-body').html(result.message);
+                        $('#modal').modal('show');
+                        if (result.status) {
+                            $("cody_like_status").attr('class', 'fas fa-heart');
+                        } else {
+                            $("cody_like_status").attr('class', 'far fa-heart');
+                        }
+                    }
+
+                });
+       }
+
+    </script>
+
+</div>
+</html>

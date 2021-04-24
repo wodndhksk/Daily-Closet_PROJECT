@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout" th:with="title='Best'">
+
+<th:block layout:fragement="css">
+    <link rel="stylesheet" th:href="@{/css/user/style.css}">
+</th:block>
+
+<div layout:fragment="content" class="container" style="background-color: white;">
+    <br/><br/>
+    <div class="py-`5` ml-2" id="pagebox">
+        <div id="catetitle">
+            <h2>Best Pick!</h2>
+            <p>Hottest Cody</p>
+        </div>
+
+
+        <th:block th:insert="item_fragements :: item_list(${itemList})"/>
+    </div>
+
+</div>
+
+</html>
