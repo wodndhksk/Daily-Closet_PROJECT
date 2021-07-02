@@ -38,7 +38,13 @@ HTML 5 CSS
 
 JavaScript
 
+### - 그 외
 
+Git
+
+SourceTree
+
+iterm
 
 
 ## 주요 기능
