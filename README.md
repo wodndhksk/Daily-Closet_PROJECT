@@ -525,7 +525,8 @@ Thymeleaf 엔진의 특성상 csrf 토큰 유효성을 판단하는데, Ajax POS
 
 --> Ajax 요청에 csrf 토큰을 추가하여 해결하였다.
 
-[Pasted Graphic 복사본.pdf](https://github.com/wodndhksk/Daily-Closet_PROJECT/files/6752432/Pasted.Graphic.pdf)
+![image](https://user-images.githubusercontent.com/73927761/124229890-3e584580-db49-11eb-8f4e-1ee8f062d650.png)
+
 
 
 
