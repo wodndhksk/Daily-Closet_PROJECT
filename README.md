@@ -434,7 +434,7 @@ Google Map API와 기상청 API를 통해 위치와 10일치 기온 데이터를
 ```
 
 ##### 현재 위치값(현 좌표```(Geolocation)```를 통한 주소 이름```(googleAPI)``` 얻기) 스크립트 
-```
+```javascript
 <!--현재 위치값(좌표,주소값) 스크립트 -->
             <script>
                 const KEY = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
