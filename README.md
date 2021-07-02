@@ -354,6 +354,80 @@ Google Map API와 기상청 API를 통해 위치와 10일치 기온 데이터를
     }
 ```
 
+##### 날씨 Api(OpenWeatherMap)를 사용하여 현재 날씨 상태 이미지로 띠우기
+```javascript
+<script>
+                //openWeatherMap 으로 오늘 실시간 날씨 + 아이콘 받기
+                const OpenWeatherKey = "XXXXXXXXXXXXXXXXXXXXXX";
+                var currentWeather = document.getElementById("loadWeather");
+                var loadWeatherIcon = document.getElementById("loadWeatherIcon");
+
+                navigator.geolocation.getCurrentPosition(function (pos) {
+                    var latitude = pos.coords.latitude;
+                    var longitude = pos.coords.longitude;
+                    let openWeatherUrl = "http://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&appid=" + OpenWeatherKey;
+
+                    console.log("체크용 222 lat: " + latitude + ", lng:" + longitude);
+                    fetch(openWeatherUrl)
+                        .then(response => response.json())
+                        .then(data => {
+                            // console.log(data);
+                            console.log("현재온도 : " + (data.main.temp - 273.15));
+                            console.log("현재습도 : " + data.main.humidity);
+                            console.log("날씨 : " + data.weather[0].main);
+                            console.log("상세날씨설명 : " + data.weather[0].description);
+                            console.log("날씨 이미지 : " + data.weather[0].icon);
+                            console.log("바람   : " + data.wind.speed);
+                            console.log("나라   : " + data.sys.country);
+                            console.log("도시이름  : " + data.name);
+                            console.log("구름  : " + (data.clouds.all) + "%");
+
+                            let temperature = Math.floor(data.main.temp - 273.15);
+                            let weather = data.weather[0].main;
+                            let weatherDetail = data.weather[0].description;
+                            //let image = data.weather[0].icon;
+                            let icon = "http://openweathermap.org/img/w/" + data.weather[0].icon + ".png";
+                            currentWeather.innerText = temperature + "°C";
+                            switch (data.weather[0].description) {
+                                case "clear sky": {
+                                    loadWeatherIcon.src = "[[@{/images/icon/sunny.png}]]";
+                                    break;
+                                }
+                                case "few clouds": {
+                                    loadWeatherIcon.src = "[[@{/images/icon/cloudy.png}]]";
+                                    break;
+                                }
+                                case "scattered clouds":
+                                case "broken clouds": {
+                                    loadWeatherIcon.src = "[[@{/images/icon/cloudy.png}]]";
+                                    break;
+                                }
+                                case "shower rain": {
+                                    loadWeatherIcon.src = "[[@{/images/icon/snower rain.png}]]";
+                                    break;
+                                }
+                                case "rain": {
+                                    loadWeatherIcon.src = "[[@{/images/icon/rainy.png}]]";
+                                    break;
+                                }
+                                case "thunderstorm": {
+                                    loadWeatherIcon.src = "[[@{/images/icon/thunder.png}]]";
+                                    break;
+                                }
+                                case "snow": {
+                                    loadWeatherIcon.innerHTML = "<i class='fas fa-snowflake fa-5x'></i>"
+                                    break;
+                                }
+                                case "mist": {
+                                    loadWeatherIcon.innerHTML = "<i class='fas fa-smog fa-5x'></i>"
+                                    break;
+                                }
+                            }
+                        });
+                });
+            </script>
+```
+
 
 
 
@@ -392,8 +466,6 @@ Google Map API와 기상청 API를 통해 위치와 10일치 기온 데이터를
     }
 
 ```
-
-
 
 
 
