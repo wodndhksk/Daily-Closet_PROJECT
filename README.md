@@ -428,8 +428,43 @@ Google Map API와 기상청 API를 통해 위치와 10일치 기온 데이터를
             </script>
 ```
 
+##### 현재 위치값(현 좌표```(Geolocation)```를 통한 주소 이름```(googleAPI)``` 얻기) 스크립트 
+```
+<!--현재 위치값(좌표,주소값) 스크립트 -->
+            <script>
+                const KEY = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+                let url;
+                let city;
+                let city_address;
+                let city_adress2;
+                var full_address = document.getElementById("full_address")
 
+                navigator.geolocation.getCurrentPosition(function (pos) {
+                    var latitude = pos.coords.latitude;
+                    var longitude = pos.coords.longitude;
+                    url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + latitude + "," + longitude + "&key=" + KEY;
 
+                    console.log("lat: " + latitude + ", lng:" + longitude);
+
+                    fetch(url)
+                        .then(response => response.json())
+                        .then(data => {
+                            //console.log(data);
+                            let parts = data.results[0].formatted_address
+                            city = parts.split(" ")[1];
+                            city_address = parts.split(" ")[2]; // ex) 마포구
+                            city_adress2 = parts.split(" ")[3]; // ~~1가
+                            full_address.innerText = city + " " + city_address + " " + city_adress2;
+                            console.log(city + " fetch");
+
+                            $("#locationBtn").click(function () {
+                                window.location.href = '/daily-recommend?city=' + city;//
+                            });
+                        });
+                });
+               
+            </script>
+```
 
 
 
