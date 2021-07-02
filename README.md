@@ -55,8 +55,8 @@ JavaScript
 ](https://www.youtube.com/watch?v=WPs8O315-P4")
 
 
-##ERD Diagram
-##Entity Relation Diagram
+## ERD Diagram
+## Entity Relation Diagram
 
 ![image](https://user-images.githubusercontent.com/73927761/124227333-76f62000-db45-11eb-9c6d-f40a225fe9da.png)
 
