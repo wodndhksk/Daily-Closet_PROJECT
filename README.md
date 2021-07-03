@@ -587,7 +587,7 @@ Thymeleaf 엔진의 특성상 csrf 토큰 유효성을 판단하는데, Ajax POS
 #### <김재우>
 
 - ERD 설계
-- 날씨별 상품 추천 기능
+- 날씨별 상품 추천 기능 구현, 페이지
 - 상품 검색 기능
 - google mail을 통한 임시비밀번호 발급(SMTP)
 - OpenWeater API를 통한 날씨 데이터 조회
