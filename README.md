@@ -167,12 +167,9 @@ Google Map API와 기상청 API를 통해 위치와 10일치 기온 데이터를
             String cityName = cityNameService.renameCity(city);
             model.addAttribute("currentTemperature", weatherService.findCurrentDateTemperature(baseDate, cityName, meridien));
             model.addAttribute("weatherList", weatherService.findCurrentLocalWeather(cityName));
-            System.out.println("주소가 null 아님");
-
         }
         else{
             model.addAttribute("currentTemperature", weatherService.findCurrentDateTemperature(baseDate, "서울_인천_경기도", meridien));
-            System.out.println("주소가 null일 경우");
         }
 
         String season = "winter";
@@ -203,21 +200,21 @@ Google Map API와 기상청 API를 통해 위치와 10일치 기온 데이터를
             }
         }
 
-        Long parent1 = Long.valueOf("12");
-        Long child1 = Long.valueOf(itemService.random_outer_list(season));
+        Long parent_outer = Long.valueOf("12");
+        Long child_outer = Long.valueOf(itemService.random_outer_list(season));
 
-        Long parent2 = Long.valueOf("3");
-        Long child2 = Long.valueOf(itemService.random_top_list(season));
+        Long parent_top = Long.valueOf("3");
+        Long child_top = Long.valueOf(itemService.random_top_list(season));
 
-        Long parent3 = Long.valueOf("31");
-        Long child3 = Long.valueOf(itemService.random_bottom_list(season));
+        Long parent_bottom = Long.valueOf("31");
+        Long child_bottom = Long.valueOf(itemService.random_bottom_list(season));
 
 
-        model.addAttribute("outer", itemService.findRecommendCategory(parent1, child1));
+        model.addAttribute("outer", itemService.findRecommendCategory(parent_outer, child_outer));
 
-        model.addAttribute("top", itemService.findRecommendCategory(parent2, child2));
+        model.addAttribute("top", itemService.findRecommendCategory(parent_top, child_top));
 
-        model.addAttribute("bottom", itemService.findRecommendCategory(parent3, child3));
+        model.addAttribute("bottom", itemService.findRecommendCategory(parent_bottom, child_bottom));
 
         return "/view/daily-recommend";
     }
