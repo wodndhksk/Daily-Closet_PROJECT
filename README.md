@@ -424,10 +424,6 @@ Thymeleaf 엔진의 특성상 csrf 토큰 유효성을 판단하는데, Ajax POS
 
 - 검색 시 Physical DB Access가 아닌 검색 엔진 오픈소스를 사용
 
-- AWS 운영 서버 추가
-
-
-
 
 
 ## 팀 역할
@@ -446,9 +442,9 @@ Thymeleaf 엔진의 특성상 csrf 토큰 유효성을 판단하는데, Ajax POS
 #### <김재우>
 
 - ERD 설계
-- 날씨별 상품 추천 기능 구현, 페이지
+- 날씨별 상품 추천 기능(백엔드) / 페이지(프론트엔드) 구현
 - 상품 검색 기능
-- google mail을 통한 임시비밀번호 발급
+- Gmail을 통한 임시비밀번호 발급
 - OpenWeater API를 통한 날씨 데이터 조회
 - Google API를 통한 위치 정보 조회
 
