@@ -342,6 +342,14 @@ Google Map API와 기상청 API를 통해 위치와 10일치 기온 데이터를
 ![image](https://user-images.githubusercontent.com/62981623/122637391-4f588e00-d129-11eb-9ac4-01815853dfef.png)
 
 
+### 4. Detail, Review 페이지
+
+선택한 상품의 세부 정보를 확인하고 Cart, LikeList에 추가 가능한 Detail Page입니다.
+상품을 구매한 회원은 Review를 작성할 수 있습니다.
+
+<img width="643" alt="스크린샷 2021-07-22 오후 5 19 48" src="https://user-images.githubusercontent.com/73927761/126609387-43deb62b-cd81-477a-b42b-10be5a3792d6.png">
+
+
 
 
 ##### MainController.java
