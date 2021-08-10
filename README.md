@@ -12,7 +12,7 @@
 
 Java : JDK 11
 
-Framework : Spring Boot 2.4.1
+Framework : Spring Boot 2.4.10
 
 IDE : IntelliJ
 
